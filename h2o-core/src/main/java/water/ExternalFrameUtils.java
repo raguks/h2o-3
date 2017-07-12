@@ -55,11 +55,16 @@ public class ExternalFrameUtils {
     }
 
     public static byte[] vecTypesFromExpectedTypes(byte[] expectedTypes, int[] vecElemSizes){
-        int size = expectedTypes.length - vecElemSizes.length; // length is number of simple expected types
-        // plus length of all vectors. the expected
-        for(int vecSize: vecElemSizes){
-            size += vecSize;
+        int size = expectedTypes.length;
+        if(vecElemSizes != null){
+            size = size - vecElemSizes.length;
+            // length is number of simple expected types
+            // plus length of all vectors. the expected
+            for(int vecSize: vecElemSizes){
+                size += vecSize;
+            }
         }
+
 
        byte[] vecTypes = new byte[size];
         int vectorCount = 0;
