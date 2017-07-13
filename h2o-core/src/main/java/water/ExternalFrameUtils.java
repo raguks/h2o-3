@@ -3,11 +3,9 @@ package water;
 import water.fvec.Vec;
 import water.network.SocketChannelFactory;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.nio.channels.ByteChannel;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import static water.ExternalFrameHandler.*;
 
@@ -56,7 +54,7 @@ public class ExternalFrameUtils {
 
     public static byte[] vecTypesFromExpectedTypes(byte[] expectedTypes, int[] vecElemSizes){
         int size = expectedTypes.length;
-        if(vecElemSizes != null){
+        if(vecElemSizes != null && vecElemSizes.length == 0){
             size = size - vecElemSizes.length;
             // length is number of simple expected types
             // plus length of all vectors. the expected
@@ -65,8 +63,7 @@ public class ExternalFrameUtils {
             }
         }
 
-
-       byte[] vecTypes = new byte[size];
+        byte[] vecTypes = new byte[size];
         int vectorCount = 0;
         int currentVecIdx = 0;
         for (byte expectedType: expectedTypes) {
